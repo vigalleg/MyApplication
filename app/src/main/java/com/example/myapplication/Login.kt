@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.myapplication.io.ApiService
+import com.example.myapplication.io.LoginRequest
 import com.example.myapplication.io.response.LoginResponse
 import com.example.myapplication.util.PreferenceHelper
 import com.example.myapplication.util.PreferenceHelper.get
@@ -59,7 +60,9 @@ class Login : AppCompatActivity() {
         val etEmail = findViewById<EditText>(R.id.et_email).text.toString()
         val etPassword = findViewById<EditText>(R.id.et_password).text.toString()
 
-        val call = apiService.postLogin(etEmail,etPassword)
+        val loginRequest = LoginRequest(username = etEmail, password = etPassword)
+
+        val call = apiService.postLogin(loginRequest)
         call.enqueue(object : Callback<LoginResponse> {
 
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
